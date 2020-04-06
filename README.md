@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 警告
+このアプリは未完成です。
 
-Things you may want to cover:
+## DiscoGraphs とは
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+DiscoGraphs とは、今まで膨大な数リリースされたジャズのアルバム情報を管理するアプリです。以下のようなことを実現します。
+- 多くのアルバム情報の管理
+- 参加アーティスト情報をもとにアーティスト同士の共演歴史を可視化
+- 各アーティストのアルバムリリース歴史の可視化
+- ユーザー間でアルバム情報の共有および評価
+- ...
