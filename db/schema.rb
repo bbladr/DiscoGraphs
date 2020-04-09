@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_29_141932) do
+ActiveRecord::Schema.define(version: 2020_04_09_140745) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -26,6 +26,29 @@ ActiveRecord::Schema.define(version: 2020_01_29_141932) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "albums", force: :cascade do |t|
+    t.string "name"
+    t.string "nameForView"
+    t.string "nameInJapanese"
+    t.text "description"
+    t.date "releasedIn"
+    t.date "recordedIn"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "department", default: "", null: false
@@ -34,6 +57,40 @@ ActiveRecord::Schema.define(version: 2020_01_29_141932) do
     t.date "joined_date"
     t.bigint "payment", default: 0, null: false
     t.text "note", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "musics", force: :cascade do |t|
+    t.string "name"
+    t.string "nameForView"
+    t.string "nameInJapanese"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "parts", force: :cascade do |t|
+    t.string "name"
+    t.string "nameForView"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "name"
+    t.string "nameForView"
+    t.string "nameInJapanese"
+    t.text "description"
+    t.date "born"
+    t.date "died"
+    t.integer "sex"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "star"
+    t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  nameForView: MyString
+  nameInJapanese: MyString
+  description: MyText
+  born: 2020-04-09
+  died: 2020-04-09
+  sex: 1
+
+two:
+  name: MyString
+  nameForView: MyString
+  nameInJapanese: MyString
+  description: MyText
+  born: 2020-04-09
+  died: 2020-04-09
+  sex: 1

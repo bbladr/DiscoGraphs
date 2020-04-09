@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  nameForView: MyString
+  nameInJapanese: MyString
+  description: MyText
+  releasedIn: 2020-04-09
+  recordedIn: 2020-04-09
+
+two:
+  name: MyString
+  nameForView: MyString
+  nameInJapanese: MyString
+  description: MyText
+  releasedIn: 2020-04-09
+  recordedIn: 2020-04-09
