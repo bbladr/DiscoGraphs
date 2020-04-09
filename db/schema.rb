@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_161255) do
+ActiveRecord::Schema.define(version: 2020_04_09_171957) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -35,12 +35,30 @@ ActiveRecord::Schema.define(version: 2020_04_09_161255) do
     t.index ["music_id"], name: "index_album_musics_on_music_id"
   end
 
+  create_table "album_request_reviews", force: :cascade do |t|
+    t.integer "album_request_id", null: false
+    t.integer "review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_request_id"], name: "index_album_request_reviews_on_album_request_id"
+    t.index ["review_id"], name: "index_album_request_reviews_on_review_id"
+  end
+
   create_table "album_requests", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status"
     t.integer "album_id"
     t.integer "request_user_id"
+  end
+
+  create_table "album_reviews", force: :cascade do |t|
+    t.integer "album_id", null: false
+    t.integer "review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_album_reviews_on_album_id"
+    t.index ["review_id"], name: "index_album_reviews_on_review_id"
   end
 
   create_table "albums", force: :cascade do |t|
@@ -58,6 +76,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_161255) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "country_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -82,6 +101,13 @@ ActiveRecord::Schema.define(version: 2020_04_09_161255) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "player_id"
   end
 
   create_table "music_genres", force: :cascade do |t|
@@ -118,12 +144,66 @@ ActiveRecord::Schema.define(version: 2020_04_09_161255) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "player_cities", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "city_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_player_cities_on_city_id"
+    t.index ["player_id"], name: "index_player_cities_on_player_id"
+  end
+
+  create_table "player_countries", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "country_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["country_id"], name: "index_player_countries_on_country_id"
+    t.index ["player_id"], name: "index_player_countries_on_player_id"
+  end
+
+  create_table "player_genres", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "genre_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id"], name: "index_player_genres_on_genre_id"
+    t.index ["player_id"], name: "index_player_genres_on_player_id"
+  end
+
+  create_table "player_parts", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "part_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["part_id"], name: "index_player_parts_on_part_id"
+    t.index ["player_id"], name: "index_player_parts_on_player_id"
+  end
+
+  create_table "player_request_reviews", force: :cascade do |t|
+    t.integer "player_request_id", null: false
+    t.integer "review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_request_id"], name: "index_player_request_reviews_on_player_request_id"
+    t.index ["review_id"], name: "index_player_request_reviews_on_review_id"
+  end
+
   create_table "player_requests", force: :cascade do |t|
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "request_user_id"
     t.integer "player_id"
+  end
+
+  create_table "player_reviews", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_player_reviews_on_player_id"
+    t.index ["review_id"], name: "index_player_reviews_on_review_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -136,6 +216,8 @@ ActiveRecord::Schema.define(version: 2020_04_09_161255) do
     t.integer "sex"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "city_id"
+    t.integer "country_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -159,8 +241,24 @@ ActiveRecord::Schema.define(version: 2020_04_09_161255) do
 
   add_foreign_key "album_musics", "albums"
   add_foreign_key "album_musics", "musics"
+  add_foreign_key "album_request_reviews", "album_requests"
+  add_foreign_key "album_request_reviews", "reviews"
+  add_foreign_key "album_reviews", "albums"
+  add_foreign_key "album_reviews", "reviews"
   add_foreign_key "music_genres", "genres"
   add_foreign_key "music_genres", "musics"
   add_foreign_key "music_reviews", "musics"
   add_foreign_key "music_reviews", "reviews"
+  add_foreign_key "player_cities", "cities"
+  add_foreign_key "player_cities", "players"
+  add_foreign_key "player_countries", "countries"
+  add_foreign_key "player_countries", "players"
+  add_foreign_key "player_genres", "genres"
+  add_foreign_key "player_genres", "players"
+  add_foreign_key "player_parts", "parts"
+  add_foreign_key "player_parts", "players"
+  add_foreign_key "player_request_reviews", "player_requests"
+  add_foreign_key "player_request_reviews", "reviews"
+  add_foreign_key "player_reviews", "players"
+  add_foreign_key "player_reviews", "reviews"
 end
