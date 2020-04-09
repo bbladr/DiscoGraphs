@@ -10,17 +10,13 @@ class Player < ApplicationRecord
   belongs_to :user, foreign_key: "creator_id"
   belongs_to :user, foreign_key: "last_updater_id"
 
+  has_many :requests, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :images, dependent: :destroy
+
   has_many :parts, through: :player_parts
   has_many :player_parts,
   accepts_nested_attributes_for :player_parts
-
-  has_many :countries, through: :player_countries
-  has_many :player_countries,
-  accepts_nested_attributes_for :player_countries
-
-  has_many :cities, through: :player_cities
-  has_many :player_cities,
-  accepts_nested_attributes_for :player_cities
 
   has_many :genres, through: :player_genres
   has_many :player_genres,
@@ -32,10 +28,7 @@ class Player < ApplicationRecord
   has_many :albums, through: :album_players
   has_many :album_players,
 
-  has_many :reviews, through: :player_reviews
-  has_many :player_reviews,
   
-  has_many :player_requests, dependent: :destroy
 
   validates :name, exclusion: { in: [nil, ""] }
   validates :nameForView, exclusion: { in: [nil, ""] }
@@ -44,9 +37,9 @@ class Player < ApplicationRecord
   validates :born
   validates :died
   validates :sex, inclusion: { in: GENDERS.keys.concat(GENDERS.keys.map(&:to_s)) }, exclusion: { in: [nil] }
+  validates :level, inclusion: { in: LEVELS.keys.concat(LEVELS.keys.map(&:to_s)) }, exclusion: { in: [nil] }
   validates :country_id, numericality: true
   validates :city_id, numericality: true
   validates :creator_id, numericality: true
   validates :last_updater_id, numericality: true
-  validates :level, inclusion: { in: LEVELS.keys.concat(LEVELS.keys.map(&:to_s)) }, exclusion: { in: [nil] }
 end

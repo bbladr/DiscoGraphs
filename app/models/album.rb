@@ -2,7 +2,11 @@ class Album < ApplicationRecord
   LEVELS = { archive: 0, draft: 1, deleted: 2, private: 3 }
   enum level: LEVELS
 
-  has_many :album_requests, dependent: :destroy
+  belongs_to :user, foreign_key: "creator_id"
+  belongs_to :user, foreign_key: "last_updater_id"
+
+  has_many :requests, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   has_many :players, through: :album_leader_players
   has_many :album_leader_players,
@@ -20,13 +24,12 @@ class Album < ApplicationRecord
   has_many :album_musics,
   accepts_nested_attributes_for :album_musics
 
-  has_many :reviews, through: :album_reviews
-  has_many :album_reviews,
 
   validates :name, exclusion: { in: [nil, ""] }
   validates :nameForView, exclusion: { in: [nil, ""] }
   validates :nameInJapanese, exclusion: { in: [nil, ""] }
   validates :description, exclusion: { in: [nil] }
+  validates :image, exclusion: { in: [nil, ""] }
   validates :releasedIn
   validates :recordedIn
   validates :creator_id, numericality: true

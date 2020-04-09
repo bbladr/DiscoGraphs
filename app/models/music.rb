@@ -6,8 +6,7 @@ class Music < ApplicationRecord
   has_many :albums, through: :album_musics
   has_many :album_musics,
 
-  has_many :reviews, through: :music_reviews
-  has_many :music_reviews,
+  has_many :reviews, dependent: :destroy
 
   validates :name, exclusion: { in: [nil, ""] }
   validates :nameForView, exclusion: { in: [nil, ""] }
