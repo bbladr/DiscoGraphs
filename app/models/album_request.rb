@@ -3,6 +3,9 @@ class Request < ApplicationRecord
   belongs_to :album, foreign_key: "album_id"
   belongs_to :user, foreign_key: "request_user_id"
 
+  has_many :reviews, through: :album_request_reviews
+  has_many :album_request_reviews,
+
   STATUS = { closed: 0, open: 1, draft: 2 }
 
   enum status: STATUS

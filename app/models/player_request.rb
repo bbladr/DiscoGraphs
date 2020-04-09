@@ -3,6 +3,9 @@ class PlayerRequest < ApplicationRecord
   belongs_to :player, foreign_key: "player_id"
   belongs_to :user, foreign_key: "request_user_id"
 
+  has_many :reviews, through: :player_request_reviews
+  has_many :player_request_reviews,
+
   STATUS = { closed: 0, open: 1, draft: 2 }
 
   enum status: STATUS
