@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_140745) do
+ActiveRecord::Schema.define(version: 2020_04_09_145805) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_140745) do
     t.string "nameInJapanese"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "composer"
   end
 
   create_table "parts", force: :cascade do |t|
