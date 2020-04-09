@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_145805) do
+ActiveRecord::Schema.define(version: 2020_04_09_161255) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -24,6 +24,23 @@ ActiveRecord::Schema.define(version: 2020_04_09_145805) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "album_musics", force: :cascade do |t|
+    t.integer "music_id", null: false
+    t.integer "album_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_album_musics_on_album_id"
+    t.index ["music_id"], name: "index_album_musics_on_music_id"
+  end
+
+  create_table "album_requests", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "status"
+    t.integer "album_id"
+    t.integer "request_user_id"
   end
 
   create_table "albums", force: :cascade do |t|
@@ -61,6 +78,30 @@ ActiveRecord::Schema.define(version: 2020_04_09_145805) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "music_genres", force: :cascade do |t|
+    t.integer "music_id", null: false
+    t.integer "genre_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id"], name: "index_music_genres_on_genre_id"
+    t.index ["music_id"], name: "index_music_genres_on_music_id"
+  end
+
+  create_table "music_reviews", force: :cascade do |t|
+    t.integer "music_id", null: false
+    t.integer "review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["music_id"], name: "index_music_reviews_on_music_id"
+    t.index ["review_id"], name: "index_music_reviews_on_review_id"
+  end
+
   create_table "musics", force: :cascade do |t|
     t.string "name"
     t.string "nameForView"
@@ -75,6 +116,14 @@ ActiveRecord::Schema.define(version: 2020_04_09_145805) do
     t.string "nameForView"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "player_requests", force: :cascade do |t|
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "request_user_id"
+    t.integer "player_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -96,4 +145,22 @@ ActiveRecord::Schema.define(version: 2020_04_09_145805) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "nameForView"
+    t.text "description"
+    t.string "password"
+    t.string "email"
+    t.integer "role"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "album_musics", "albums"
+  add_foreign_key "album_musics", "musics"
+  add_foreign_key "music_genres", "genres"
+  add_foreign_key "music_genres", "musics"
+  add_foreign_key "music_reviews", "musics"
+  add_foreign_key "music_reviews", "reviews"
 end
