@@ -8,5 +8,8 @@ class Player < ApplicationRecord
   has_many :cities, through: :player_cities
   has_many :player_cities,
 
+  has_many :reviews, through: :player_reviews
+  has_many :player_reviews,
+  
   has_many :player_requests, dependent: :destroy
 end
