@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_171957) do
+ActiveRecord::Schema.define(version: 2020_04_09_173039) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 2020_04_09_171957) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "album_leader_players", force: :cascade do |t|
+    t.integer "album_id", null: false
+    t.integer "player_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_album_leader_players_on_album_id"
+    t.index ["player_id"], name: "index_album_leader_players_on_player_id"
+  end
+
   create_table "album_musics", force: :cascade do |t|
     t.integer "music_id", null: false
     t.integer "album_id", null: false
@@ -33,6 +42,15 @@ ActiveRecord::Schema.define(version: 2020_04_09_171957) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["album_id"], name: "index_album_musics_on_album_id"
     t.index ["music_id"], name: "index_album_musics_on_music_id"
+  end
+
+  create_table "album_players", force: :cascade do |t|
+    t.integer "album_id", null: false
+    t.integer "player_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_album_players_on_album_id"
+    t.index ["player_id"], name: "index_album_players_on_player_id"
   end
 
   create_table "album_request_reviews", force: :cascade do |t|
@@ -218,6 +236,9 @@ ActiveRecord::Schema.define(version: 2020_04_09_171957) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "city_id"
     t.integer "country_id"
+    t.integer "creator_id"
+    t.integer "last_updater_id"
+    t.integer "level"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -239,8 +260,12 @@ ActiveRecord::Schema.define(version: 2020_04_09_171957) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "album_leader_players", "albums"
+  add_foreign_key "album_leader_players", "players"
   add_foreign_key "album_musics", "albums"
   add_foreign_key "album_musics", "musics"
+  add_foreign_key "album_players", "albums"
+  add_foreign_key "album_players", "players"
   add_foreign_key "album_request_reviews", "album_requests"
   add_foreign_key "album_request_reviews", "reviews"
   add_foreign_key "album_reviews", "albums"
