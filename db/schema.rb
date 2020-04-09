@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_173039) do
+ActiveRecord::Schema.define(version: 2020_04_09_175019) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2020_04_09_173039) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "album_genres", force: :cascade do |t|
+    t.integer "album_id", null: false
+    t.integer "genre_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_album_genres_on_album_id"
+    t.index ["genre_id"], name: "index_album_genres_on_genre_id"
   end
 
   create_table "album_leader_players", force: :cascade do |t|
@@ -88,6 +97,9 @@ ActiveRecord::Schema.define(version: 2020_04_09_173039) do
     t.date "recordedIn"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "level"
+    t.integer "last_updater_id"
+    t.integer "creator_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -260,6 +272,8 @@ ActiveRecord::Schema.define(version: 2020_04_09_173039) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "album_genres", "albums"
+  add_foreign_key "album_genres", "genres"
   add_foreign_key "album_leader_players", "albums"
   add_foreign_key "album_leader_players", "players"
   add_foreign_key "album_musics", "albums"

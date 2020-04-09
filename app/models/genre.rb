@@ -1,4 +1,7 @@
 class Genre < ApplicationRecord
+  has_many :albums, through: :album_genres
+  has_many :album_genres,
+
   has_many :musics, through: :music_genres
   has_many :music_genres,
 
