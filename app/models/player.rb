@@ -3,7 +3,7 @@ class Player < ApplicationRecord
   enum gender: GENDERS
 
   LEVELS = { archive: 0, draft: 1, deleted: 2, private: 3 }
-  enum level: LEVELS
+  # enum level: LEVELS
 
   belongs_to :country
   belongs_to :city
@@ -30,11 +30,11 @@ class Player < ApplicationRecord
   has_many :album_players, dependent: :restrict_with_exception
 
   validates :name, exclusion: { in: [nil, ""] }, format: { with: /\A[a-zA-Z]+\z/ }
-  validates :nameForView, allow_blank: true
-  validates :nameInJapanese, allow_blank: true, format: { with: /\A[ぁ-んー－]+\z/ }
-  validates :description, allow_blank: true
-  validates :born, allow_blank: true
-  validates :died, allow_blank: true
+  # validates :nameForView
+  validates :nameInJapanese, format: { with: /\A[ぁ-んー－]+\z/ }
+  # validates :description
+  # validates :born
+  # validates :died
   validates :sex, inclusion: { in: GENDERS.keys.concat(GENDERS.keys.map(&:to_s)) }, exclusion: { in: [nil] }
   validates :level, inclusion: { in: LEVELS.keys.concat(LEVELS.keys.map(&:to_s)) }, exclusion: { in: [nil] }
   validates :country_id, numericality: true

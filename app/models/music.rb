@@ -10,7 +10,7 @@ class Music < ApplicationRecord
   has_many :music_links, dependent: :destroy
 
   validates :name, exclusion: { in: [nil, ""] }, uniqueness: true, format: { with: /\A[a-zA-Z0−9]+\z/ }
-  validates :nameForView, allow_blank: true
-  validates :nameInJapanese, allow_blank: true, format: { with: /\A[ぁ-んー－]+\z/ }
-  validates :composer, allow_blank: true
+  # validates :nameForView
+  validates :nameInJapanese, format: { with: /\A[ぁ-んー－]+\z/ }
+  # validates :composer
 end

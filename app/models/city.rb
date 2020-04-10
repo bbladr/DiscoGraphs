@@ -1,5 +1,5 @@
 class City < ApplicationRecord
-  belongs_to :country, 
+  belongs_to :country
 
   has_many :players, dependent: :nullify
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_175019) do
+ActiveRecord::Schema.define(version: 2020_04_10_170138) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -44,6 +44,14 @@ ActiveRecord::Schema.define(version: 2020_04_09_175019) do
     t.index ["player_id"], name: "index_album_leader_players_on_player_id"
   end
 
+  create_table "album_links", force: :cascade do |t|
+    t.string "name"
+    t.integer "album_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_album_links_on_album_id"
+  end
+
   create_table "album_musics", force: :cascade do |t|
     t.integer "music_id", null: false
     t.integer "album_id", null: false
@@ -67,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_175019) do
     t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["album_request_id"], name: "index_album_request_reviews_on_album_request_id"
     t.index ["review_id"], name: "index_album_request_reviews_on_review_id"
   end
@@ -84,6 +93,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_175019) do
     t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["album_id"], name: "index_album_reviews_on_album_id"
     t.index ["review_id"], name: "index_album_reviews_on_review_id"
   end
@@ -149,11 +159,20 @@ ActiveRecord::Schema.define(version: 2020_04_09_175019) do
     t.index ["music_id"], name: "index_music_genres_on_music_id"
   end
 
+  create_table "music_links", force: :cascade do |t|
+    t.string "name"
+    t.integer "music_id_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["music_id_id"], name: "index_music_links_on_music_id_id"
+  end
+
   create_table "music_reviews", force: :cascade do |t|
     t.integer "music_id", null: false
     t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["music_id"], name: "index_music_reviews_on_music_id"
     t.index ["review_id"], name: "index_music_reviews_on_review_id"
   end
@@ -201,6 +220,22 @@ ActiveRecord::Schema.define(version: 2020_04_09_175019) do
     t.index ["player_id"], name: "index_player_genres_on_player_id"
   end
 
+  create_table "player_images", force: :cascade do |t|
+    t.string "name"
+    t.integer "player_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_player_images_on_player_id"
+  end
+
+  create_table "player_links", force: :cascade do |t|
+    t.string "name"
+    t.integer "player_id_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id_id"], name: "index_player_links_on_player_id_id"
+  end
+
   create_table "player_parts", force: :cascade do |t|
     t.integer "player_id", null: false
     t.integer "part_id", null: false
@@ -215,6 +250,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_175019) do
     t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["player_request_id"], name: "index_player_request_reviews_on_player_request_id"
     t.index ["review_id"], name: "index_player_request_reviews_on_review_id"
   end
@@ -232,6 +268,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_175019) do
     t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["player_id"], name: "index_player_reviews_on_player_id"
     t.index ["review_id"], name: "index_player_reviews_on_review_id"
   end

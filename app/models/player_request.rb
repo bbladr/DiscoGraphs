@@ -5,7 +5,7 @@ class PlayerRequest < ApplicationRecord
   belongs_to :player
   belongs_to :user, foreign_key: "request_user_id"
 
-  has_many :reviews, dependent: :destroy
+  has_many :player_reviews, dependent: :destroy
 
   validates :player_id, numericality: true
   validates :request_user_id, numericality: true

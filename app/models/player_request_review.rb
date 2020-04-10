@@ -1,7 +1,9 @@
-class RequestReview < ApplicationRecord
-  belongs_to :request
+class PlayerRequestReview < ApplicationRecord
+  belongs_to :player_request
+  belongs_to :user
 
   validates :star, numericality: true, allow_nil: true
-  validates :comment, allow_blank: true
-  validates :request_id, numericality: true
+  # validates :comment
+  validates :player_request_id, numericality: true
+  validates :user_id, numericality: true
 end

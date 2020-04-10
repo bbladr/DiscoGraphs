@@ -1,6 +1,6 @@
 class Album < ApplicationRecord
   LEVELS = { archive: 0, draft: 1, deleted: 2, private: 3 }
-  enum level: LEVELS
+  # enum level: LEVELS
 
   belongs_to :user, foreign_key: "creator_id"
   belongs_to :user, foreign_key: "last_updater_id"
@@ -27,12 +27,12 @@ class Album < ApplicationRecord
 
 
   validates :name, exclusion: { in: [nil, ""] }, format: { with: /\A[a-zA-Z]+\z/ }
-  validates :nameForView, allow_blank: true
-  validates :nameInJapanese, allow_blank: true, format: { with: /\A[ぁ-んー－]+\z/ }
-  validates :description, allow_blank: true
-  validates :image, allow_blank: true
-  validates :releasedIn, allow_blank: true
-  validates :recordedIn, allow_blank: true
+  # validates :nameForView
+  validates :nameInJapanese, format: { with: /\A[ぁ-んー－]+\z/ }
+  # validates :description
+  # validates :image
+  # validates :releasedIn
+  # validates :recordedIn
   validates :creator_id, numericality: true
   validates :last_updater_id, numericality: true
   validates :level, inclusion: { in: LEVELS.keys.concat(LEVELS.keys.map(&:to_s)) }, exclusion: { in: [nil] }

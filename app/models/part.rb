@@ -3,5 +3,5 @@ class Part < ApplicationRecord
   has_many :player_parts, dependent: :destroy
 
   validates :name, exclusion: { in: [nil, ""] }, uniqueness: true, format: { with: /\A[a-zA-Z]+\z/ }
-  validates :nameForView, allow_blank: true
+  # validates :nameForView
 end
