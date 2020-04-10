@@ -7,11 +7,11 @@ class User < ApplicationRecord
   has_many :album_requests, dependent: :destroy
   has_many :player_requests, dependent: :destroy
 
-  validates :name, exclusion: { in: [nil, ""] }
-  validates :nameForView, exclusion: { in: [nil, ""] }
-  validates :description, exclusion: { in: [nil] }
-  validates :password, exclusion: { in: [nil, ""] }
+  validates :name, exclusion: { in: [nil, ""] }, uniqueness: true, format: { with: /\A[a-zA-Z0-9]+\z/ }
+  validates :nameForView, allow_blank: true
+  validates :description, allow_blank: true, format: { with: /\A[ぁ-んー－]+\z/ }
+  validates :password, exclusion: { in: [nil, ""] }, confirmation: true, length: { minimum: 8 }
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
-  validates :image, exclusion: { in: [nil, ""] }
+  validates :image, allow_blank: true
   validates :role, inclusion: { in: ROLES.keys.concat(ROLES.keys.map(&:to_s)) }, exclusion: { in: [nil] }
 end

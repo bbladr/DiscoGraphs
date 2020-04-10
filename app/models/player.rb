@@ -28,12 +28,12 @@ class Player < ApplicationRecord
   has_many :albums, through: :album_players, dependent: :restrict_with_exception
   has_many :album_players, dependent: :restrict_with_exception
 
-  validates :name, exclusion: { in: [nil, ""] }
-  validates :nameForView, exclusion: { in: [nil, ""] }
-  validates :nameInJapanese, exclusion: { in: [nil, ""] }
-  validates :description, exclusion: { in: [nil] }
-  validates :born
-  validates :died
+  validates :name, exclusion: { in: [nil, ""] }, format: { with: /\A[a-zA-Z]+\z/ }
+  validates :nameForView, allow_blank: true
+  validates :nameInJapanese, allow_blank: true, format: { with: /\A[ぁ-んー－]+\z/ }
+  validates :description, allow_blank: true
+  validates :born, allow_blank: true
+  validates :died, allow_blank: true
   validates :sex, inclusion: { in: GENDERS.keys.concat(GENDERS.keys.map(&:to_s)) }, exclusion: { in: [nil] }
   validates :level, inclusion: { in: LEVELS.keys.concat(LEVELS.keys.map(&:to_s)) }, exclusion: { in: [nil] }
   validates :country_id, numericality: true

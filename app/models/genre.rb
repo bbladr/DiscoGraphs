@@ -8,5 +8,5 @@ class Genre < ApplicationRecord
   has_many :players, through: :player_genres, dependent: :nullify
   has_many :player_genres, dependent: :destroy
 
-  validates :name, exclusion: { in: [nil, ""] }
+  validates :name, exclusion: { in: [nil, ""] }, uniqueness: true, format: { with: /\A[a-zA-Z]+\z/ }
 end

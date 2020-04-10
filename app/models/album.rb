@@ -25,13 +25,13 @@ class Album < ApplicationRecord
   accepts_nested_attributes_for :album_musics
 
 
-  validates :name, exclusion: { in: [nil, ""] }
-  validates :nameForView, exclusion: { in: [nil, ""] }
-  validates :nameInJapanese, exclusion: { in: [nil, ""] }
-  validates :description, exclusion: { in: [nil] }
-  validates :image, exclusion: { in: [nil, ""] }
-  validates :releasedIn
-  validates :recordedIn
+  validates :name, exclusion: { in: [nil, ""] }, format: { with: /\A[a-zA-Z]+\z/ }
+  validates :nameForView, allow_blank: true
+  validates :nameInJapanese, allow_blank: true, format: { with: /\A[ぁ-んー－]+\z/ }
+  validates :description, allow_blank: true
+  validates :image, allow_blank: true
+  validates :releasedIn, allow_blank: true
+  validates :recordedIn, allow_blank: true
   validates :creator_id, numericality: true
   validates :last_updater_id, numericality: true
   validates :level, inclusion: { in: LEVELS.keys.concat(LEVELS.keys.map(&:to_s)) }, exclusion: { in: [nil] }

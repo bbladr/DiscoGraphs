@@ -8,8 +8,8 @@ class Music < ApplicationRecord
 
   has_many :music_reviews, dependent: :destroy
 
-  validates :name, exclusion: { in: [nil, ""] }
-  validates :nameForView, exclusion: { in: [nil, ""] }
-  validates :nameInJapanese, exclusion: { in: [nil, ""] }
-  validates :composer, exclusion: { in: [nil, ""] }
+  validates :name, exclusion: { in: [nil, ""] }, uniqueness: true, format: { with: /\A[a-zA-Z0−9]+\z/ }
+  validates :nameForView, allow_blank: true
+  validates :nameInJapanese, allow_blank: true, format: { with: /\A[ぁ-んー－]+\z/ }
+  validates :composer, allow_blank: true
 end

@@ -3,6 +3,6 @@ class City < ApplicationRecord
 
   has_many :players, dependent: :nullify
 
-  validates :name, exclusion: { in: [nil, ""] }
+  validates :name, exclusion: { in: [nil, ""] }, uniqueness: true, format: { with: /\A[a-zA-Z]+\z/ }
   validates :country_id, numericality: true
 end
