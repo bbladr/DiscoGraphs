@@ -1,7 +1,7 @@
-class RequestReview < ApplicationRecord
-  belongs_to :request
+class AlbumRequestReview < ApplicationRecord
+  belongs_to :album_request
 
   validates :star, numericality: true
   validates :comment, exclusion: { in: [nil] }
-  validates :request_id, numericality: true
+  validates :album_request_id, numericality: true
 end
