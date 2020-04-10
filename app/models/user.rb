@@ -4,7 +4,8 @@ class User < ApplicationRecord
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  has_many :requests, dependent: :destroy
+  has_many :album_requests, dependent: :destroy
+  has_many :player_requests, dependent: :destroy
 
   validates :name, exclusion: { in: [nil, ""] }
   validates :nameForView, exclusion: { in: [nil, ""] }

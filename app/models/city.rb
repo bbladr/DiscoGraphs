@@ -1,7 +1,7 @@
 class City < ApplicationRecord
-  belongs_to :country, foreign_key: "country_id"
+  belongs_to :country, 
 
-  has_many :players, dependent: :destroy
+  has_many :players, dependent: :nullify
 
   validates :name, exclusion: { in: [nil, ""] }
   validates :country_id, numericality: true

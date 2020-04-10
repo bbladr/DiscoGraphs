@@ -1,5 +1,5 @@
-class Image < ApplicationRecord
-  belongs_to :player, foreign_key: "player_id"
+class PlayerImage < ApplicationRecord
+  belongs_to :player
 
   validates :name, exclusion: { in: [nil, ""] }
   validates :player_id, numericality: true

@@ -4,6 +4,7 @@ class CreateMusics < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :nameForView
       t.string :nameInJapanese
+      t.string :composer
 
       t.timestamps
     end

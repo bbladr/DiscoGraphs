@@ -5,30 +5,28 @@ class Player < ApplicationRecord
   LEVELS = { archive: 0, draft: 1, deleted: 2, private: 3 }
   enum level: LEVELS
 
-  belongs_to :country, foreign_key: "country_id"
-  belongs_to :city, foreign_key: "city_id"
+  belongs_to :country
+  belongs_to :city
   belongs_to :user, foreign_key: "creator_id"
   belongs_to :user, foreign_key: "last_updater_id"
 
-  has_many :requests, dependent: :destroy
-  has_many :reviews, dependent: :destroy
-  has_many :images, dependent: :destroy
+  has_many :player_requests, dependent: :destroy
+  has_many :player_reviews, dependent: :destroy
+  has_many :player_images, dependent: :destroy
 
-  has_many :parts, through: :player_parts
-  has_many :player_parts,
+  has_many :parts, through: :player_parts, dependent: :nullify
+  has_many :player_parts, dependent: :destroy
   accepts_nested_attributes_for :player_parts
 
-  has_many :genres, through: :player_genres
-  has_many :player_genres,
+  has_many :genres, through: :player_genres, dependent: :nullify
+  has_many :player_genres, dependent: :destroy
   accepts_nested_attributes_for :player_genres
 
-  has_many :albums, through: :album_leader_players
-  has_many :album_leader_players,
+  has_many :albums, through: :album_leader_players, dependent: :restrict_with_exception
+  has_many :album_leader_players, dependent: :restrict_with_exception
 
-  has_many :albums, through: :album_players
-  has_many :album_players,
-
-  
+  has_many :albums, through: :album_players, dependent: :restrict_with_exception
+  has_many :album_players, dependent: :restrict_with_exception
 
   validates :name, exclusion: { in: [nil, ""] }
   validates :nameForView, exclusion: { in: [nil, ""] }

@@ -7,6 +7,9 @@ class CreateAlbums < ActiveRecord::Migration[6.0]
       t.text :description
       t.date :releasedIn
       t.date :recordedIn
+      t.string :image
+      t.integer :level
+      t.belongs_to :user
 
       t.timestamps
     end

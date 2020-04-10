@@ -8,6 +8,10 @@ class CreatePlayers < ActiveRecord::Migration[6.0]
       t.date :born
       t.date :died
       t.integer :sex
+      t.integer :level
+      t.belongs_to :country
+      t.belongs_to :city
+      t.belongs_to :user
 
       t.timestamps
     end
