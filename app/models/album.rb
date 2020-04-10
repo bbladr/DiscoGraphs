@@ -7,6 +7,7 @@ class Album < ApplicationRecord
 
   has_many :album_requests, dependent: :destroy
   has_many :album_reviews, dependent: :destroy
+  has_many :album_links, dependent: :destroy
 
   has_many :players, through: :album_leader_players, dependent: :nullify
   has_many :album_leader_players, dependent: :destroy

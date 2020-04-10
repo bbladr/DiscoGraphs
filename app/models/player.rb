@@ -13,6 +13,7 @@ class Player < ApplicationRecord
   has_many :player_requests, dependent: :destroy
   has_many :player_reviews, dependent: :destroy
   has_many :player_images, dependent: :destroy
+  has_many :player_links, dependent: :destroy
 
   has_many :parts, through: :player_parts, dependent: :nullify
   has_many :player_parts, dependent: :destroy
